@@ -1,0 +1,35 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int pop = 0;
+    int epop = 0;
+    // TODO: Prompt for start size
+    while (pop < 9)
+    {
+        pop = get_int("What's the starting population? ");
+    }
+
+
+    // TODO: Prompt for end size
+    while (epop < pop)
+    {
+        epop = get_int("What's the ending population? ");
+    }
+
+    // TODO: Calculate number of years until we reach threshold
+    int years = 0;
+
+
+    while (pop < epop)
+    {
+        pop = pop + (pop / 3) - (pop / 4);
+        years = years + 1;
+    }
+    if (pop >= epop)
+    {
+        printf("Years: %i \n", years);
+    }
+
+}
