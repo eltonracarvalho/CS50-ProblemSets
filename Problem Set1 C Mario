@@ -1,0 +1,35 @@
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    int height = 0;
+
+    // TODO: Prompt for start height
+    while (height < 1 || height > 8)
+    {
+        height = get_int("Height? ");
+    }
+
+
+    for (int lines = 0; lines < height; lines++)
+    {
+        //number of spaces
+        for (char s = lines + 1; s < height; s++)
+        {
+            printf(" ");
+        }
+
+        //number of hashes
+        
+        for (char h = -1; h < lines; h++)
+        {
+            printf("#");
+        }
+
+        printf("\n");
+
+    }
+
+
+}
