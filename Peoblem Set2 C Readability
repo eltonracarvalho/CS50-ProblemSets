@@ -1,0 +1,105 @@
+#include <ctype.h>
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+
+//universal variables
+
+float letters(string textF);
+float words(string textF);
+float sentences(string textF);
+float index(string textF);
+
+
+int main(void)
+{
+    //gets text
+    string text = get_string("Text: ");
+    int indexLevel = round(index(text));
+
+    //prints index level
+    if (indexLevel < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+
+    if (indexLevel >= 16)
+    {
+        printf("Grade 16+\n");
+    }
+
+    if ((indexLevel >= 1) && (indexLevel < 16))
+    {
+        printf("Grade %d\n", indexLevel);
+    }
+}
+
+
+
+
+//Function to count letters in text
+float letters(string textF)
+
+{
+    float letters = 0;
+
+
+    for (int i = 0, n = strlen(textF); i < n; i++)
+    {
+        if (isalpha(textF[i]))
+        {
+            letters++;
+
+        }
+    }
+    return letters;
+}
+
+//Function to count words in text
+float words(string textF)
+
+{
+    float words = 1;
+
+
+    for (int i = 0, n = strlen(textF); i < n; i++)
+    {
+        if (isspace(textF[i]))
+        {
+            words++;
+
+        }
+    }
+    return words;
+}
+
+//Function to count sentences in text
+float sentences(string textF)
+
+{
+    float sentences = 0;
+
+
+    for (int i = 1, n = strlen(textF); i < n; i++)
+    {
+        if ('.' == (textF[i]) || '?' == (textF[i]) || '!' == (textF[i]))
+        {
+            sentences++;
+
+        }
+    }
+    return sentences;
+}
+
+//Function to calculate Coleman-Liau index
+float index(string textF)
+
+{
+    float L = letters(textF) * 100 / words(textF);
+    float S =  sentences(textF) * 100 / words(textF);
+    //formula for index
+    float index = 0.0588 * L - 0.296 * S - 15.8;
+
+    return index;
+}
